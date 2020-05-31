@@ -17,11 +17,12 @@ public class Digits{
     public static boolean hasLessThanThreeDigits(BigInteger number){
         String numberString = number.toString(); //pavercia i string skaiciu
         int[] digitTable = new int[10]; //susikuriam masyva
-        for(int i = 0; i < numberString.length(); i++){ //einu per visa string ilgi
-            digitTable[Integer.parseInt(numberString.substring(i, i + 1))]++;
-            if(digitTable[Integer.parseInt(numberString.substring(i, i + 1))] > 3){
+        while(number.compareTo(new BigInteger("0")) == 1){
+            digitTable[number.mod(new BigInteger("10")).intValue()]++; // paimu skaiciaus liekana, dalinta is 10
+            if(digitTable[number.mod(new BigInteger("10")).intValue()] > 3){
                 return false;
             }
+            number = number.divide(new BigInteger("10")); //sumazina skaiciu vienu skaitmeniu nuo galo
         }
         return true;
     }
